@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entalsaddition</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 50px; }
+    input { font-size: 1.5rem; padding: 10px; width: 100px; margin-top: 10px; }
+    button { font-size: 1.5rem; padding: 10px 20px; margin-top: 20px; }
+    .feedback { font-size: 1.5rem; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1 id="question">Vad är 3 + 5?</h1>
+  <input id="answerInput" type="number" placeholder="Svar">
+  <br>
+  <button onclick="checkAnswer()">Kolla svar</button>
+  <div class="feedback" id="feedback"></div>
+
+  <script>
+    let num1, num2;
+    function newQuestion() {
+      num1 = Math.floor(Math.random() * 9) + 1;
+      num2 = Math.floor(Math.random() * 9) + 1;
+      document.getElementById("question").textContent = `Vad är ${num1} + ${num2}?`;
+      document.getElementById("answerInput").value = "";
+      document.getElementById("feedback").textContent = "";
+    }
+    function checkAnswer() {
+      const userAnswer = parseInt(document.getElementById("answerInput").value);
+      const correct = num1 + num2;
+      const feedbackEl = document.getElementById("feedback");
+      if (userAnswer === correct) {
+        feedbackEl.textContent = "Rätt! 🎉"; feedbackEl.style.color = "green";
+        setTimeout(newQuestion, 1000);
+      } else {
+        feedbackEl.textContent = "Fel, försök igen."; feedbackEl.style.color = "red";
+      }
+    }
+    newQuestion();
+  </script>
+</body>
+</html>
